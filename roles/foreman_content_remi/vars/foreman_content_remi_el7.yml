@@ -1,0 +1,181 @@
+---
+# noqa: var-naming[no-role-prefix]
+
+foreman_content_credentials_remi_el7:
+  - name: "{{ foreman_cred_name_prefix | default('') }}RPM-GPG-KEY-remi"
+    content_type: gpg_key
+    content: "{{ lookup('ansible.builtin.url', foreman_repo_baseurl_remi ~ '/RPM-GPG-KEY-remi', split_lines=False, validate_certs=False) }}"
+    # content: "{{ lookup('ansible.builtin.file', role_path ~ '/files/RPM-GPG-KEY-remi') }}"
+
+
+foreman_products_defaults: &foreman_products_defaults
+  content_type: yum
+  gpg_key: "{{ foreman_cred_name_prefix | default('') }}RPM-GPG-KEY-remi"
+  download_policy: "{{ foreman_products_defaults_download_policy_remi }}"
+  # mirror_on_sync: True
+  # mirroring_policy: "additive"
+  # mirroring_policy: "mirror_content_only"
+  # mirroring_policy: "mirror_complete"
+  mirroring_policy: "{{ foreman_products_defaults_mirroring_policy_remi }}"
+  verify_ssl_on_sync: "{{ foreman_products_defaults_verify_ssl_on_sync_remi | bool }}"
+  # http_proxy: Default Proxy
+  http_proxy_policy: "{{ foreman_products_defaults_http_proxy_policy_remi }}"
+  unprotected: "{{ foreman_products_defaults_unprotected_remi | bool }}"
+
+
+foreman_products_remi_el7:
+  - name: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    label: "{{ foreman_product_label_prefix | default('') }}Remi"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/remi/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 5.4 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php54-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php54/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 5.5 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php55-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php55/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 5.6 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php56-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php56/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.0 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php70-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php70/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.1 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php71-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php71/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.2 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php72-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php72/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.3 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php73-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php73/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.4 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php74-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php74/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 8.0 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php80-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php80/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 8.1 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php81-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php81/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 8.2 - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-php82-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/php82/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi Safe - EL7"
+        label: "{{ foreman_repo_label_prefix | default('') }}remi-safe-el7"
+        <<: *foreman_products_defaults
+        url: "{{ foreman_repo_baseurl_remi_el7 }}/enterprise/7/safe/x86_64/"
+        organization: "{{ foreman_organization_remi_el7 }}"
+
+foreman_content_views_remi_el7:
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php54_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 5.4 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php55_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 5.5 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php56_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 5.6 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php70_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.0 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php71_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.1 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php72_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.2 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php73_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.3 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php74_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 7.4 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php80_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 8.0 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php81_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 8.1 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_php82_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi PHP 8.2 - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+  - name: "{{ foreman_cv_prefix | default('cv_') }}{{ foreman_cv_name_prefix | default('') }}remi_safe_el7"
+    organization: "{{ foreman_organization_remi_el7 }}"
+    repositories:
+      - name: "{{ foreman_repo_name_prefix | default('') }}Remi Safe - EL7"
+        product: "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+    allow_promote: "{{ foreman_cv_allow_promote_remi_el7 }}"
+
+foreman_activation_keys_remi_el7: []
+
+foreman_sync_plan_products_remi_el7:
+  - Remi Repository
+

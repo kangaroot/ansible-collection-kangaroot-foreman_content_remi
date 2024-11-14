@@ -1,0 +1,124 @@
+---
+# noqa: var-naming[no-role-prefix]
+# defaults file for foreman_content_remi
+
+#######################################
+### URLS
+#######################################
+
+### REMI
+
+foreman_repo_baseurl_remi: https://rpms.remirepo.net
+
+foreman_repo_baseurl_remi_el7: "{{ foreman_repo_baseurl_remi }}"
+foreman_repo_baseurl_remi_el8: "{{ foreman_repo_baseurl_remi }}"
+foreman_repo_baseurl_remi_el9: "{{ foreman_repo_baseurl_remi }}"
+
+
+#######################################
+### ENABLE VARS
+#######################################
+
+### REMI
+
+foreman_enable_remi: false
+
+foreman_enable_remi_el7: false
+foreman_enable_remi_el8: "{{ foreman_enable_remi | bool }}"
+foreman_enable_remi_el9: "{{ foreman_enable_remi | bool }}"
+
+
+#######################################
+### PRODUCT DEFAULTS
+#######################################
+
+### REMI
+
+foreman_products_defaults_download_policy_remi: "{{ foreman_products_defaults_download_policy }}"
+foreman_products_defaults_mirroring_policy_remi: "{{ foreman_products_defaults_mirroring_policy }}"
+foreman_products_defaults_verify_ssl_on_sync_remi: "{{ foreman_products_defaults_verify_ssl_on_sync | bool }}"
+foreman_products_defaults_http_proxy_policy_remi: "{{ foreman_products_defaults_http_proxy_policy }}"
+foreman_products_defaults_unprotected_remi: "{{ foreman_products_defaults_unprotected | bool }}"
+
+
+#######################################
+### ORGANIZATION VARS
+#######################################
+
+### REMI
+
+foreman_organization_remi: "{{ foreman_organization }}"
+
+foreman_organization_remi_el7: "{{ foreman_organization_remi }}"
+foreman_organization_remi_el8: "{{ foreman_organization_remi }}"
+foreman_organization_remi_el9: "{{ foreman_organization_remi }}"
+
+
+#######################################
+### CONTENT VIEW DEFAULTS
+#######################################
+
+### REMI
+
+foreman_cv_allow_promote_remi: "{{ foreman_cv_allow_promote | bool }}"
+
+foreman_cv_allow_promote_remi_el7: "{{ foreman_cv_allow_promote_remi | bool }}"
+foreman_cv_allow_promote_remi_el8: "{{ foreman_cv_allow_promote_remi | bool }}"
+foreman_cv_allow_promote_remi_el9: "{{ foreman_cv_allow_promote_remi | bool }}"
+
+
+#######################################
+### CONTENT
+#######################################
+
+foreman_content_credentials_remi_main: []
+foreman_content_credentials_remi: "{{ ( foreman_content_credentials_remi_main | default([]) if foreman_enable_remi | bool else [] ) |
+  union( foreman_content_credentials_remi_el7 | default([]) if foreman_enable_remi_el7 | bool else [] ) |
+  union( foreman_content_credentials_remi_el8 | default([]) if foreman_enable_remi_el8 | bool else [] ) |
+  union( foreman_content_credentials_remi_el9 | default([]) if foreman_enable_remi_el9 | bool else [] )
+  }}"
+
+foreman_products_remi_main: []
+foreman_products_remi: "{{ ( foreman_products_remi_main | default([]) if foreman_enable_remi | bool else [] ) |
+  union( foreman_products_remi_el7 | default([]) if foreman_enable_remi_el7 | bool else [] ) |
+  union( foreman_products_remi_el8 | default([]) if foreman_enable_remi_el8 | bool else [] ) |
+  union( foreman_products_remi_el9 | default([]) if foreman_enable_remi_el9 | bool else [] )
+  }}"
+
+foreman_content_views_remi_main: []
+foreman_content_views_remi: "{{ ( foreman_content_views_remi_main | default([]) if foreman_enable_remi | bool else [] ) |
+  union( foreman_content_views_remi_el7 | default([]) if foreman_enable_remi_el7 | bool else [] ) |
+  union( foreman_content_views_remi_el8 | default([]) if foreman_enable_remi_el8 | bool else [] ) |
+  union( foreman_content_views_remi_el9 | default([]) if foreman_enable_remi_el9 | bool else [] )
+  }}"
+
+foreman_operatingsystems_remi_main: []
+foreman_operatingsystems_remi: "{{ ( foreman_operatingsystems_remi_main | default([]) if foreman_enable_remi | bool else [] ) |
+  union( foreman_operatingsystems_remi_el7 | default([]) if foreman_enable_remi_el7 | bool else [] ) |
+  union( foreman_operatingsystems_remi_el8 | default([]) if foreman_enable_remi_el8 | bool else [] ) |
+  union( foreman_operatingsystems_remi_el9 | default([]) if foreman_enable_remi_el9 | bool else [] )
+  }}"
+
+foreman_installation_media_remi_main: []
+foreman_installation_media_remi: "{{ ( foreman_installation_media_remi_main | default([]) if foreman_enable_remi | bool else [] ) |
+  union( foreman_installation_media_remi_el7 | default([]) if foreman_enable_remi_el7 | bool else [] ) |
+  union( foreman_installation_media_remi_el8 | default([]) if foreman_enable_remi_el8 | bool else [] ) |
+  union( foreman_installation_media_remi_el9 | default([]) if foreman_enable_remi_el9 | bool else [] )
+  }}"
+
+foreman_activation_keys_remi_main: []
+foreman_activation_keys_remi: "{{ ( foreman_activation_keys_remi_main | default([]) if foreman_enable_remi | bool else [] ) |
+  union( foreman_activation_keys_remi_el7 | default([]) if foreman_enable_remi_el7 | bool else [] ) |
+  union( foreman_activation_keys_remi_el8 | default([]) if foreman_enable_remi_el8 | bool else [] ) |
+  union( foreman_activation_keys_remi_el9 | default([]) if foreman_enable_remi_el9 | bool else [] )
+  }}"
+
+foreman_sync_plan_products_remi_main:
+  - "{{ foreman_product_name_prefix | default('') }}Remi Repository"
+
+foreman_sync_plan_products_remi: "{{ ( foreman_sync_plan_products_remi_main | default([]) if foreman_enable_remi | bool else [] ) |
+  union( foreman_sync_plan_products_remi_el7 | default([]) if foreman_enable_remi_el7 | bool else [] ) |
+  union( foreman_sync_plan_products_remi_el8 | default([]) if foreman_enable_remi_el8 | bool else [] ) |
+  union( foreman_sync_plan_products_remi_el9 | default([]) if foreman_enable_remi_el9 | bool else [] )
+  }}"
+
